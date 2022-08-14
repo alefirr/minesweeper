@@ -1,5 +1,5 @@
 import React from 'react';
-import { KEYS } from '../constants';
+import { SETTINGS_ORDER } from '../constants';
 
 export const SettingsPage = ({ setSettings, settings, openGame }) => {
   const handleOnChange = (field) => (event) => {
@@ -9,33 +9,21 @@ export const SettingsPage = ({ setSettings, settings, openGame }) => {
 
   return (
     <div className="settings-bar">
-      <p>Height: {settings.height}</p>
-      <input
-        type="range"
-        min="5"
-        max="20"
-        step="1"
-        value={settings.height}
-        onChange={handleOnChange(KEYS.HEIGHT)}
-      />
-      <p>Width: {settings.width}</p>
-      <input
-        type="range"
-        min="5"
-        max="20"
-        step="1"
-        value={settings.width}
-        onChange={handleOnChange(KEYS.WIDTH)}
-      />
-      <p>Mines: {settings.mines}</p>
-      <input
-        type="range"
-        min="3"
-        max="50"
-        step="3"
-        value={settings.mines}
-        onChange={handleOnChange(KEYS.MINES)}
-      />
+      {SETTINGS_ORDER.map((field) => (
+        <div key={`setting-${field.key}`}>
+          <p>
+            {field.name}: {settings.height}
+          </p>
+          <input
+            type="range"
+            step="1"
+            min={field.minValue}
+            max={field.maxValue}
+            value={settings.height}
+            onChange={handleOnChange(field.key)}
+          />
+        </div>
+      ))}
       <button onClick={openGame}>Start new game</button>
     </div>
   );

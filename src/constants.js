@@ -1,7 +1,20 @@
-export const KEYS = { HEIGHT: 'height', WIDTH: 'width', MINES: 'mines' };
-
-export const MIN_VALUES = {
-  [KEYS.HEIGHT]: 5,
-  [KEYS.WIDTH]: 5,
-  [KEYS.MINES]: 3,
-};
+export const SETTINGS_ORDER = [
+  {
+    key: 'height',
+    name: 'Height',
+    minValue: 5,
+    maxValue: 20,
+  },
+  {
+    key: 'width',
+    name: 'Width',
+    minValue: 5,
+    maxValue: 20,
+  },
+  {
+    key: 'mines',
+    name: 'Mines',
+    minValue: 5,
+    maxValue: 50,
+  },
+];
