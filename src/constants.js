@@ -18,3 +18,7 @@ export const SETTINGS_ORDER = [
     maxValue: 50,
   },
 ];
+
+export const MIN_VALUES = SETTINGS_ORDER.reduce((acc, item) => {
+  return { ...acc, [item.key]: item.minValue };
+}, {});
