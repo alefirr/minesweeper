@@ -1,5 +1,5 @@
 import React from 'react';
-import { KEYS } from '../constants';
+import { KEYS, MIN_VALUES } from '../constants';
 
 export const SettingsPage = ({ setSettings, settings, openGame }) => {
   const handleOnChange = (field) => (event) => {
@@ -12,7 +12,7 @@ export const SettingsPage = ({ setSettings, settings, openGame }) => {
       <p>Height: {settings.height}</p>
       <input
         type="range"
-        min="5"
+        min={MIN_VALUES.height}
         max="20"
         step="1"
         value={settings.height}
@@ -21,7 +21,7 @@ export const SettingsPage = ({ setSettings, settings, openGame }) => {
       <p>Width: {settings.width}</p>
       <input
         type="range"
-        min="5"
+        min={MIN_VALUES.width}
         max="20"
         step="1"
         value={settings.width}
@@ -30,7 +30,7 @@ export const SettingsPage = ({ setSettings, settings, openGame }) => {
       <p>Mines: {settings.mines}</p>
       <input
         type="range"
-        min="3"
+        min={MIN_VALUES.mines}
         max="50"
         step="3"
         value={settings.mines}
