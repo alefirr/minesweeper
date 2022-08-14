@@ -1,7 +1,7 @@
 import React from 'react';
 import { KEYS } from '../constants';
 
-export const SettingsBar = ({ setSettings, settings }) => {
+export const SettingsPage = ({ setSettings, settings, openGame }) => {
   const handleOnChange = (field) => (event) => {
     const newValue = event.target.value;
     setSettings((prev) => ({ ...prev, [field]: newValue }));
@@ -36,6 +36,7 @@ export const SettingsBar = ({ setSettings, settings }) => {
         value={settings.mines}
         onChange={handleOnChange(KEYS.MINES)}
       />
+      <button onClick={openGame}>Start new game</button>
     </div>
   );
 };
