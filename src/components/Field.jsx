@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react';
+import { Cell } from './Cell';
 
 export const Field = ({ isGamePageOpened, settings }) => {
   useEffect(() => {
@@ -10,5 +11,9 @@ export const Field = ({ isGamePageOpened, settings }) => {
     }
   }, [isGamePageOpened]);
 
-  return <div></div>;
+  return (
+    <div>
+      <Cell />
+    </div>
+  );
 };
