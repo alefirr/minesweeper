@@ -1,23 +1,22 @@
-import logo from './logo.svg';
+import React from 'react';
+import { useState } from 'react';
+import { Field, SettingsBar } from './components';
 import './App.css';
+import { MIN_VALUES } from './constants';
 
 function App() {
+  const [isGameStarted, setIsGameStarted] = useState(false);
+  const [settings, setSettings] = useState(MIN_VALUES);
+
+  const toggleGameStatus = () => setIsGameStarted((prev) => !prev);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <button onClick={toggleGameStatus}>
+        {isGameStarted ? 'End game' : 'Start new game'}
+      </button>
+      <SettingsBar setSettings={setSettings} settings={settings} />
+      {isGameStarted && <Field />}
     </div>
   );
 }
