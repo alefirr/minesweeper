@@ -1,15 +1,25 @@
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Cell } from './Cell';
 
-export const Field = ({ isGamePageOpened, settings }) => {
+const getCellsFieldWithStatus = (settings, isCellsOpen) =>
+  Array(settings.height).fill(Array(settings.width).fill(isCellsOpen));
+
+const getCellsContent = ({ width, height, mines }) => {
+  return [];
+};
+
+export const Field = ({ isGameOver, settings }) => {
+  const [cellsStatus, setCellsStatus] = useState();
+  const [cellsContent, setCellsContent] = useState();
+
   useEffect(() => {
-    if (isGamePageOpened) {
-      console.log('game started');
+    if (isGameOver) {
+      setCellsStatus(getCellsFieldWithStatus(settings, true));
     } else {
-      console.log('game ended');
+      setCellsStatus(getCellsFieldWithStatus(settings, false));
+      setCellsContent(getCellsContent(settings));
     }
-  }, [isGamePageOpened]);
+  }, [isGameOver, settings]);
 
   return (
     <div>

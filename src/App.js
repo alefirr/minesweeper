@@ -13,11 +13,7 @@ function App() {
   return (
     <div>
       {isGamePageOpened ? (
-        <GamePage
-          settings={settings}
-          isGamePageOpened={isGamePageOpened}
-          openSettings={toggleGamePage}
-        />
+        <GamePage settings={settings} openSettings={toggleGamePage} />
       ) : (
         <SettingsPage
           setSettings={setSettings}

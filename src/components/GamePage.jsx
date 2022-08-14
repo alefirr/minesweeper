@@ -2,18 +2,14 @@ import React from 'react';
 import { Field } from './Field';
 import { useState } from 'react';
 
-export const GamePage = ({ settings, isGamePageOpened, openSettings }) => {
+export const GamePage = ({ settings, openSettings }) => {
   const [isGameOver, setIsGameOver] = useState(false);
 
   const toggleGameStatus = () => setIsGameOver((prev) => !prev);
 
   return (
     <div className="game-page">
-      <Field
-        isGamePageOpened={isGamePageOpened}
-        settings={settings}
-        isGameOver={isGameOver}
-      />
+      <Field settings={settings} isGameOver={isGameOver} />
       <div>
         {isGameOver ? (
           <>
