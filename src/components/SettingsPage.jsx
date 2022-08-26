@@ -4,7 +4,7 @@ import { getMaxMinesValue, SETTINGS_ORDER } from '../constants';
 
 export const SettingsPage = ({ setSettings, settings, openGame }) => {
   const handleOnChange = (field) => (event) => {
-    const newValue = event.target.value;
+    const newValue = +event.target.value;
     setSettings((prev) => ({ ...prev, [field]: newValue }));
   };
 

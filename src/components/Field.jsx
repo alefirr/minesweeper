@@ -23,9 +23,6 @@ export const Field = ({ isGameOver, settings }) => {
 
   return (
     <div className="field">
-      {console.log(settings.height)}
-      {console.log(settings.width)}
-      {console.log(cellsStatus)}
       {cellsStatus?.map((row, indexRow) =>
         row?.map((cell, indexCol) => (
           <Cell
