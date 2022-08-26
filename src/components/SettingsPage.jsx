@@ -17,14 +17,15 @@ export const SettingsPage = ({ setSettings, settings, openGame }) => {
   }, [settings.height, settings.width]);
 
   return (
-    <div className="settings-bar">
+    <div className="settings-page main-container">
       {SETTINGS_ORDER.map((field) => {
         return (
-          <div key={`setting-${field.key}`}>
-            <p>
+          <div key={`setting-${field.key}`} className="settings-tile">
+            <p className="settings-parametr">
               {field.name}: {settings[field.key]}
             </p>
             <input
+              className="settings-input"
               type="range"
               step="1"
               min={field.minValue}
@@ -35,7 +36,9 @@ export const SettingsPage = ({ setSettings, settings, openGame }) => {
           </div>
         );
       })}
-      <button onClick={openGame}>Start new game</button>
+      <button onClick={openGame} className="start-new-game-button">
+        Start new game
+      </button>
     </div>
   );
 };

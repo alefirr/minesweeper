@@ -23,7 +23,10 @@ export const Field = ({ isGameOver, settings }) => {
 
   return (
     <div>
-      <Cell />
+      <Cell isOpen={false} content={1} />
+      <Cell isOpen={true} content={1} />
+      <Cell isOpen={true} content={0} />
+      <Cell isOpen={true} content={'mine'} />
     </div>
   );
 };

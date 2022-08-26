@@ -6,6 +6,23 @@ const CELL_DIMENSIONS = {
   height: CELL_SIZE,
 };
 
-export const Cell = () => {
-  return <div style={CELL_DIMENSIONS} />;
+const renderContent = (content) => {
+  switch (content) {
+    case 0:
+      return null;
+    case 'mine':
+      return 'B';
+    default:
+      return content;
+  }
+};
+
+export const Cell = ({ isOpen, content }) => {
+  return isOpen ? (
+    <div style={CELL_DIMENSIONS} className="cell-open cell ">
+      {renderContent(content)}
+    </div>
+  ) : (
+    <div style={CELL_DIMENSIONS} className="cell-closed cell"></div>
+  );
 };

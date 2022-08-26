@@ -17,7 +17,9 @@ export const GamePage = ({ settings, openSettings }) => {
             <button onClick={toggleGameStatus}>Restart</button>
           </>
         ) : (
-          <button onClick={toggleGameStatus}>End Game</button>
+          <>
+            <button onClick={toggleGameStatus}>End Game</button>
+          </>
         )}
       </div>
     </div>
