@@ -22,11 +22,19 @@ export const Field = ({ isGameOver, settings }) => {
   }, [isGameOver, settings]);
 
   return (
-    <div>
-      <Cell isOpen={false} content={1} />
-      <Cell isOpen={true} content={1} />
-      <Cell isOpen={true} content={0} />
-      <Cell isOpen={true} content={'mine'} />
+    <div className="field">
+      {console.log(settings.height)}
+      {console.log(settings.width)}
+      {console.log(cellsStatus)}
+      {cellsStatus?.map((row, indexRow) =>
+        row?.map((cell, indexCol) => (
+          <Cell
+            key={`cell-${indexRow}-${indexCol}`}
+            isOpen={true}
+            content={1}
+          />
+        ))
+      )}
     </div>
   );
 };
