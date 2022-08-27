@@ -20,7 +20,7 @@ const renderContent = (content) => {
 
 export const Cell = ({ isOpen, content }) => {
   return isOpen ? (
-    <div style={CELL_DIMENSIONS} className="cell-open cell ">
+    <div style={CELL_DIMENSIONS} className="cell-open cell">
       {renderContent(content)}
     </div>
   ) : (
