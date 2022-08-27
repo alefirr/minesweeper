@@ -1,35 +1,40 @@
 import React, { useEffect, useState } from 'react';
 import { Cell } from './Cell';
 
-const getCellsFieldWithStatus = (settings, isCellsOpen) =>
-  Array(settings.width).fill(Array(settings.height).fill(isCellsOpen));
+// FIELD VALUE EXAMPLE:
+//  [
+//    [{isOpen: false, content: 'bomb' }, {isOpen: false, content: 1 }],
+//    [{isOpen: trut, content: 8 }, {isOpen: false, content: 1 }],
+//    [{isOpen: false, content: 'bomb'}, {isOpen: false, content: 1 }],
+//  ]
 
-const getCellsContent = ({ width, height, mines }) => {
-  return [];
-};
+const generateField = (settings) =>
+  Array(settings.width).fill(Array(settings.height).fill({ isOpen: false, content: 0 }));
+
+const openField = (field) => {
+  return field.map((row) => row.map((cell) => ({ ...cell, isOpen: true })));
+}
 
 export const Field = ({ isGameOver, settings }) => {
-  const [cellsStatus, setCellsStatus] = useState();
-  const [cellsContent, setCellsContent] = useState();
+  const [field, setField] = useState();
 
   useEffect(() => {
     if (isGameOver) {
-      setCellsStatus(getCellsFieldWithStatus(settings, true));
+      setField(openField);
     } else {
-      setCellsStatus(getCellsFieldWithStatus(settings, false));
-      setCellsContent(getCellsContent(settings));
+      const newField = generateField(settings)
+      setField(newField);
     }
   }, [isGameOver, settings]);
 
   return (
     <div className="field">
-      {cellsStatus?.map((row, indexRow) => (
-        <div clcassName="field-rows">
+      {field?.map((row, indexRow) => (
+        <div>
           {row?.map((cell, indexCol) => (
             <Cell
               key={`cell-${indexRow}-${indexCol}`}
-              isOpen={true}
-              content={1}
+              {...cell}
             />
           ))}
         </div>

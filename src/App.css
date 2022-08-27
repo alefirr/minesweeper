@@ -2,6 +2,7 @@ html {
   display: flex;
   justify-content: center;
 }
+
 .main-container {
   display: flex;
   flex-direction: column;
@@ -16,6 +17,7 @@ html {
   font-family: 'Silkscreen', cursive;
   font-size: 40px;
 }
+
 .settings-tile {
   display: flex;
   flex-direction: column;
@@ -41,6 +43,7 @@ html {
   outline: none;
   border-radius: 1px;
 }
+
 .settings-input::-webkit-slider-thumb {
   appearance: none;
   width: 16px;
@@ -51,6 +54,7 @@ html {
   border: 2px solid #000;
   /* background-color: green; */
 }
+
 .navigation-button {
   background-color: rgb(0, 0, 0);
   height: 40px;
@@ -64,23 +68,17 @@ html {
   cursor: pointer;
   transition: 1s;
 }
+
 .navigation-button:hover {
   transform: scale(1.05);
 }
+
 .field {
   display: flex;
   flex-direction: row;
 
   justify-content: center;
   align-items: center;
-}
-.field-row {
-  display: flex;
-  flex-direction: column;
-
-  justify-content: center;
-  align-items: center;
-  width: 100%;
 }
 
 .end-game-button-container {
@@ -89,6 +87,7 @@ html {
   justify-content: center;
   align-items: center;
 }
+
 .cell {
   background-color: rgba(42, 236, 42, 0.637);
   border: 3px solid orange;

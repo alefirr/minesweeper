@@ -1,5 +1,5 @@
 import React from 'react';
-import { CELL_SIZE, CELL_MARGIN, BUTTON_BOX_SIZE } from '../constants';
+import { CELL_SIZE, CELL_MARGIN } from '../constants';
 
 const CELL_DIMENSIONS = {
   width: CELL_SIZE,
