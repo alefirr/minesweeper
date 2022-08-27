@@ -51,25 +51,41 @@ html {
   border: 2px solid #000;
   /* background-color: green; */
 }
-.start-new-game-button {
+.navigation-button {
   background-color: rgb(0, 0, 0);
   height: 40px;
   border-radius: 10px;
   border: 1px solid black;
+  margin: 20px;
   font-family: 'Silkscreen', cursive;
   font-size: 20px;
   color: white;
-  margin-top: 40px;
+
   cursor: pointer;
   transition: 1s;
 }
-.start-new-game-button:hover {
-  transform: scale(1.1);
+.navigation-button:hover {
+  transform: scale(1.05);
 }
 .field {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+
+  justify-content: center;
+  align-items: center;
+}
+.field-row {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.end-game-button-container {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -77,12 +93,19 @@ html {
   background-color: rgba(42, 236, 42, 0.637);
   border: 3px solid orange;
   border-radius: 20%;
-  margin: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 200%;
   color: #fff;
   text-align: center;
   line-height: 40px;
   font-family: 'Silkscreen', cursive;
+  box-sizing: border-box;
+}
+
+.cell:hover {
+  background-color: rgba(36, 204, 36, 0.637);
 }
 
 .cell-closed {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Cell } from './Cell';
 
 const getCellsFieldWithStatus = (settings, isCellsOpen) =>
-  Array(settings.height).fill(Array(settings.width).fill(isCellsOpen));
+  Array(settings.width).fill(Array(settings.height).fill(isCellsOpen));
 
 const getCellsContent = ({ width, height, mines }) => {
   return [];
@@ -23,15 +23,17 @@ export const Field = ({ isGameOver, settings }) => {
 
   return (
     <div className="field">
-      {cellsStatus?.map((row, indexRow) =>
-        row?.map((cell, indexCol) => (
-          <Cell
-            key={`cell-${indexRow}-${indexCol}`}
-            isOpen={true}
-            content={1}
-          />
-        ))
-      )}
+      {cellsStatus?.map((row, indexRow) => (
+        <div clcassName="field-rows">
+          {row?.map((cell, indexCol) => (
+            <Cell
+              key={`cell-${indexRow}-${indexCol}`}
+              isOpen={true}
+              content={1}
+            />
+          ))}
+        </div>
+      ))}
     </div>
   );
 };

@@ -36,7 +36,10 @@ export const SettingsPage = ({ setSettings, settings, openGame }) => {
           </div>
         );
       })}
-      <button onClick={openGame} className="start-new-game-button">
+      <button
+        onClick={openGame}
+        className="start-new-game-button navigation-button"
+      >
         Start new game
       </button>
     </div>

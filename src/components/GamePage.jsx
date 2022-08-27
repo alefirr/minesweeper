@@ -13,13 +13,28 @@ export const GamePage = ({ settings, openSettings }) => {
       <div>
         {isGameOver ? (
           <>
-            <button onClick={openSettings}>Change Mode</button>
-            <button onClick={toggleGameStatus}>Restart</button>
+            <button
+              onClick={openSettings}
+              className="change-mode-button navigation-button"
+            >
+              Change Mode
+            </button>
+            <button
+              onClick={toggleGameStatus}
+              className="restart-button navigation-button"
+            >
+              Restart
+            </button>
           </>
         ) : (
-          <>
-            <button onClick={toggleGameStatus}>End Game</button>
-          </>
+          <div className="end-game-button-container">
+            <button
+              onClick={toggleGameStatus}
+              className="end-game-button navigation-button"
+            >
+              End Game
+            </button>
+          </div>
         )}
       </div>
     </div>
