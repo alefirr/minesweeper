@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Cell } from './Cell';
+import produce from 'immer';
 
 // FIELD VALUE EXAMPLE:
 //  [
@@ -7,8 +8,8 @@ import { Cell } from './Cell';
 //    [{isOpen: trut, content: 8 }, {isOpen: false, content: 1 }],
 //    [{isOpen: false, content: 'mine'}, {isOpen: false, content: 1 }],
 //  ]
-
-const getRandomArrayItem = items => items[Math.floor(Math.random() * items.length)];
+const getRandomArrayItem = (items) =>
+  items[Math.floor(Math.random() * items.length)];
 
 const countMinesAround = (field, row, col) => {
   let bombsAround = 0;
@@ -22,13 +23,13 @@ const countMinesAround = (field, row, col) => {
     }
   }
   return bombsAround;
-}
+};
 
 const generateField = ({ width, height, mines }) => {
   const cellsNumber = width * height;
   const cellsValuesArray = Array(cellsNumber).fill(0);
   const cellsIndexesArray = [...cellsValuesArray.keys()];
-  
+
   for (let i = 0; i < mines; i++) {
     const randomIndex = getRandomArrayItem(cellsIndexesArray);
 
@@ -51,21 +52,35 @@ const generateField = ({ width, height, mines }) => {
     }
   }
 
-  return field.map((row) => row.map((cell) => ({ isOpen: false, content: cell })));
-}
+  return field.map((row) =>
+    row.map((cell) => ({ isOpen: false, content: cell }))
+  );
+};
 
 const openField = (field) => {
   return field.map((row) => row.map((cell) => ({ ...cell, isOpen: true })));
-}
+};
 
-export const Field = ({ isGameOver, settings }) => {
+export const Field = ({ isGameOver, settings, endGame }) => {
   const [field, setField] = useState();
+
+  const openCell = (row, col) => {
+    if (field[row][col].content === 'mine') {
+      endGame();
+    } else {
+      setField(
+        produce((field) => {
+          field[row][col].isOpen = true;
+        })
+      );
+    }
+  };
 
   useEffect(() => {
     if (isGameOver) {
       setField(openField);
     } else {
-      const newField = generateField(settings)
+      const newField = generateField(settings);
       setField(newField);
     }
   }, [isGameOver, settings]);
@@ -77,6 +92,7 @@ export const Field = ({ isGameOver, settings }) => {
           {row?.map((cell, indexCol) => (
             <Cell
               key={`cell-${indexCol}`}
+              openCell={() => openCell(indexRow, indexCol)}
               {...cell}
             />
           ))}

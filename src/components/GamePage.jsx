@@ -1,15 +1,32 @@
 import React from 'react';
 import { Field } from './Field';
+import { BalanceList } from './BalanceList';
 import { useState } from 'react';
 
 export const GamePage = ({ settings, openSettings }) => {
   const [isGameOver, setIsGameOver] = useState(false);
+  const [seconds, setSeconds] = useState(0);
 
   const toggleGameStatus = () => setIsGameOver((prev) => !prev);
 
+  const onRestartGame = () => {
+    toggleGameStatus();
+    setSeconds(0);
+  };
+
   return (
-    <div className="game-page">
-      <Field settings={settings} isGameOver={isGameOver} />
+    <div className="game-page-container">
+      <BalanceList
+        isGameOver={isGameOver}
+        onRestartGame={onRestartGame}
+        seconds={seconds}
+        setSeconds={setSeconds}
+      />
+      <Field
+        settings={settings}
+        isGameOver={isGameOver}
+        endGame={toggleGameStatus}
+      />
       <div>
         {isGameOver ? (
           <>
@@ -20,7 +37,7 @@ export const GamePage = ({ settings, openSettings }) => {
               Change Mode
             </button>
             <button
-              onClick={toggleGameStatus}
+              onClick={onRestartGame}
               className="restart-button navigation-button"
             >
               Restart

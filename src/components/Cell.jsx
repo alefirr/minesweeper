@@ -18,12 +18,16 @@ const renderContent = (content) => {
   }
 };
 
-export const Cell = ({ isOpen, content }) => {
+export const Cell = ({ isOpen, content, openCell }) => {
   return isOpen ? (
     <div style={CELL_DIMENSIONS} className="cell-open cell">
       {renderContent(content)}
     </div>
   ) : (
-    <div style={CELL_DIMENSIONS} className="cell-closed cell"></div>
+    <div
+      style={CELL_DIMENSIONS}
+      className="cell-closed cell"
+      onClick={openCell}
+    ></div>
   );
 };

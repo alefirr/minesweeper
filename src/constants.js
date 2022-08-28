@@ -1,6 +1,7 @@
 export const CELL_SIZE = 40;
 export const CELL_MARGIN = 2;
-export const BUTTON_BOX_SIZE = 40;
+export const BUTTON_BOX_SIZE = 80;
+export const BALANCE_LIST = 160;
 
 export const getMaxMinesValue = (settings) =>
   settings.height * settings.width - 1;
@@ -20,7 +21,9 @@ export const SETTINGS_ORDER = [
     name: 'Width',
     minValue: 5,
     getMaxValue: () =>
-      Math.floor(window.innerWidth / (CELL_SIZE + CELL_MARGIN * 2)),
+      Math.floor(
+        (window.innerWidth - BALANCE_LIST) / (CELL_SIZE + CELL_MARGIN * 2)
+      ),
   },
   {
     key: 'mines',

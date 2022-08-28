@@ -80,11 +80,11 @@ html {
   align-items: center;
 }
 
-.field-rows{
+.field-rows {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: end;
 }
 
 .end-game-button-container {
@@ -109,12 +109,18 @@ html {
   box-sizing: border-box;
 }
 
-.cell:hover {
-  background-color: rgba(36, 204, 36, 0.637);
+.cell-closed:hover {
+  background-color: rgba(202, 184, 16, 0.637);
 }
 
 .cell-closed {
-  background-color: rgb(17, 209, 116);
+  background-color: rgb(136, 90, 6);
   border: 3px solid rgb(217, 171, 19);
   border-radius: 20%;
+}
+
+.balance-list-container {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
