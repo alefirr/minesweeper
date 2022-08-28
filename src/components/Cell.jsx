@@ -13,12 +13,19 @@ const renderContent = (content) => {
       return null;
     case 'mine':
       return 'B';
+    case 'detonated':
+      return 'D';
     default:
       return content;
   }
 };
 
-export const Cell = ({ isOpen, content, openCell }) => {
+export const Cell = ({ isOpen, content, openCell, flagCell, isFlagged }) => {
+  const onRightClick = (e) => {
+    e.preventDefault();
+    flagCell();
+  };
+
   return isOpen ? (
     <div style={CELL_DIMENSIONS} className="cell-open cell">
       {renderContent(content)}
@@ -28,6 +35,9 @@ export const Cell = ({ isOpen, content, openCell }) => {
       style={CELL_DIMENSIONS}
       className="cell-closed cell"
       onClick={openCell}
-    ></div>
+      onContextMenu={onRightClick}
+    >
+      {isFlagged ? 'F' : null}
+    </div>
   );
 };

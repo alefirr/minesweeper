@@ -2,13 +2,15 @@ import React, { useEffect } from 'react';
 
 export const BalanceList = ({
   isGameOver,
-  onRestartGame,
   seconds,
   setSeconds,
+  flagsNumber,
 }) => {
   useEffect(() => {
     !isGameOver && setTimeout(() => setSeconds((prev) => prev + 1), 1000);
   }, [seconds, isGameOver]);
+
+  useEffect(() => {}, []);
 
   const secondsToDisplay = seconds % 60;
 
@@ -18,6 +20,9 @@ export const BalanceList = ({
         {Math.floor(seconds / 60)}:{secondsToDisplay < 10 ? '0' : ''}
         {secondsToDisplay}
       </h1>
+      <div>
+        <p>Flags left:{flagsNumber}</p>
+      </div>
     </div>
   );
 };

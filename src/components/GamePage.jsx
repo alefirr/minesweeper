@@ -6,11 +6,13 @@ import { useState } from 'react';
 export const GamePage = ({ settings, openSettings }) => {
   const [isGameOver, setIsGameOver] = useState(false);
   const [seconds, setSeconds] = useState(0);
+  const [flagsNumber, setFlagsNumber] = useState(settings.mines);
 
   const toggleGameStatus = () => setIsGameOver((prev) => !prev);
 
   const onRestartGame = () => {
     toggleGameStatus();
+    setFlagsNumber(settings.mines);
     setSeconds(0);
   };
 
@@ -18,14 +20,16 @@ export const GamePage = ({ settings, openSettings }) => {
     <div className="game-page-container">
       <BalanceList
         isGameOver={isGameOver}
-        onRestartGame={onRestartGame}
         seconds={seconds}
         setSeconds={setSeconds}
+        flagsNumber={flagsNumber}
       />
       <Field
         settings={settings}
         isGameOver={isGameOver}
         endGame={toggleGameStatus}
+        flagsNumber={flagsNumber}
+        setFlagsNumber={setFlagsNumber}
       />
       <div>
         {isGameOver ? (

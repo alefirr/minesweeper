@@ -4,7 +4,7 @@ import produce from 'immer';
 
 // FIELD VALUE EXAMPLE:
 //  [
-//    [{isOpen: false, content: 'mine' }, {isOpen: false, content: 1 }],
+//    [{isOpen: false, content: 'mine', isFlagged: true }, {isOpen: false, content: 1 }],
 //    [{isOpen: trut, content: 8 }, {isOpen: false, content: 1 }],
 //    [{isOpen: false, content: 'mine'}, {isOpen: false, content: 1 }],
 //  ]
@@ -61,11 +61,17 @@ const openField = (field) => {
   return field.map((row) => row.map((cell) => ({ ...cell, isOpen: true })));
 };
 
-export const Field = ({ isGameOver, settings, endGame }) => {
+export const Field = ({
+  isGameOver,
+  settings,
+  endGame,
+  flagsNumber,
+  setFlagsNumber,
+}) => {
   const [field, setField] = useState();
 
   const openCell = (row, col) => {
-    if (field[row][col].content === 'mine') {
+    if (field[row][col].content === 'mine' && !field[row][col].isOpen) {
       endGame();
     } else {
       setField(
@@ -73,6 +79,26 @@ export const Field = ({ isGameOver, settings, endGame }) => {
           field[row][col].isOpen = true;
         })
       );
+    }
+  };
+
+  const flagCell = (row, col) => {
+    const isFlagged = field[row][col].isFlagged;
+
+    if (isFlagged) {
+      setField(
+        produce((field) => {
+          field[row][col].isFlagged = false;
+        })
+      );
+      setFlagsNumber((prev) => prev + 1);
+    } else if (flagsNumber > 0) {
+      setField(
+        produce((field) => {
+          field[row][col].isFlagged = true;
+        })
+      );
+      setFlagsNumber((prev) => prev - 1);
     }
   };
 
@@ -93,6 +119,7 @@ export const Field = ({ isGameOver, settings, endGame }) => {
             <Cell
               key={`cell-${indexCol}`}
               openCell={() => openCell(indexRow, indexCol)}
+              flagCell={() => flagCell(indexRow, indexCol)}
               {...cell}
             />
           ))}
