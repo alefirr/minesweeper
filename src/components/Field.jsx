@@ -70,6 +70,21 @@ export const Field = ({
 }) => {
   const [field, setField] = useState();
 
+  const pushCellsToOpen = (row, col, cellsToOpen) => {
+    if (field[row][col].content === 0) {
+      for (let i = row - 1; i <= row + 1; i++) {
+        for (let j = col - 1; j <= col + 1; j++) {
+          if (i >= 0 && i < field.length && j >= 0 && j < field[i].length) {
+            if (!cellsToOpen.some(([ii, jj]) => ii === i && jj === j)) {
+              cellsToOpen.push([i, j]);
+              pushCellsToOpen(i, j, cellsToOpen);
+            }
+          }
+        }
+      }
+    }
+  };
+
   const openCell = (row, col) => {
     if (field[row][col].content === 'mine' && !field[row][col].isOpen) {
       endGame();
@@ -77,6 +92,18 @@ export const Field = ({
       setField(
         produce((field) => {
           field[row][col].isOpen = true;
+        })
+      );
+
+      const cellsToOpen = [];
+
+      pushCellsToOpen(row, col, cellsToOpen);
+
+      setField(
+        produce((field) => {
+          cellsToOpen.forEach(([i, j]) => {
+            field[i][j].isOpen = true;
+          });
         })
       );
     }
