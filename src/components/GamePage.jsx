@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 export const GamePage = ({ settings, openSettings }) => {
   const [isGameOver, setIsGameOver] = useState(false);
+
   const [seconds, setSeconds] = useState(0);
   const [flagsNumber, setFlagsNumber] = useState(settings.mines);
 

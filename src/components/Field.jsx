@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Cell } from './Cell';
 import produce from 'immer';
 
@@ -69,6 +69,17 @@ export const Field = ({
   setFlagsNumber,
 }) => {
   const [field, setField] = useState();
+  const [isGameWin, setIsGameWin] = useState(false);
+
+  const countOpenCells = useCallback(() => {
+    let openCells = 0;
+    field.forEach((row) =>
+      row.forEach((cell) => {
+        if (cell.isOpen) openCells++;
+      })
+    );
+    return openCells;
+  }, [field]);
 
   const pushCellsToOpen = (row, col, cellsToOpen) => {
     if (field[row][col].content === 0) {
@@ -130,28 +141,45 @@ export const Field = ({
   };
 
   useEffect(() => {
+    if (
+      field &&
+      !isGameOver &&
+      countOpenCells() === settings.width * settings.height - settings.mines
+    ) {
+      setIsGameWin(true);
+      endGame();
+    }
+  }, [countOpenCells, endGame, field, isGameOver, settings]);
+
+  useEffect(() => {
     if (isGameOver) {
       setField(openField);
     } else {
       const newField = generateField(settings);
       setField(newField);
+      setIsGameWin(false);
     }
   }, [isGameOver, settings]);
 
   return (
-    <div className="field">
-      {field?.map((row, indexRow) => (
-        <div key={`row-${indexRow}-`} className="field-rows">
-          {row?.map((cell, indexCol) => (
-            <Cell
-              key={`cell-${indexCol}`}
-              openCell={() => openCell(indexRow, indexCol)}
-              flagCell={() => flagCell(indexRow, indexCol)}
-              {...cell}
-            />
-          ))}
-        </div>
-      ))}
+    <div className="container">
+      {' '}
+      <div className="field">
+        {field?.map((row, indexRow) => (
+          <div key={`row-${indexRow}-`} className="field-rows">
+            {row?.map((cell, indexCol) => (
+              <Cell
+                key={`cell-${indexCol}`}
+                openCell={() => openCell(indexRow, indexCol)}
+                flagCell={() => flagCell(indexRow, indexCol)}
+                isGameWin={isGameWin}
+                {...cell}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
+      {isGameWin && <div className="win-message">You win!</div>}
     </div>
   );
 };

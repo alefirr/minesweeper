@@ -7,20 +7,25 @@ const CELL_DIMENSIONS = {
   margin: CELL_MARGIN,
 };
 
-const renderContent = (content) => {
+const renderContent = (content, isGameWin) => {
   switch (content) {
     case 0:
       return null;
     case 'mine':
-      return 'B';
-    case 'detonated':
-      return 'D';
+      return isGameWin ? 'C' : 'B';
     default:
       return content;
   }
 };
 
-export const Cell = ({ isOpen, content, openCell, flagCell, isFlagged }) => {
+export const Cell = ({
+  isOpen,
+  content,
+  openCell,
+  flagCell,
+  isFlagged,
+  isGameWin,
+}) => {
   const onRightClick = (e) => {
     e.preventDefault();
     flagCell();
@@ -28,7 +33,7 @@ export const Cell = ({ isOpen, content, openCell, flagCell, isFlagged }) => {
 
   return isOpen ? (
     <div style={CELL_DIMENSIONS} className="cell-open cell">
-      {renderContent(content)}
+      {renderContent(content, isGameWin)}
     </div>
   ) : (
     <div
