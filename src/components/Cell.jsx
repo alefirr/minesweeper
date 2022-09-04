@@ -1,4 +1,7 @@
 import React from 'react';
+import mine from '../mine.png';
+import flag from '../flag.png';
+import camomile from '../camomile.png';
 import { CELL_SIZE, CELL_MARGIN } from '../constants';
 
 const CELL_DIMENSIONS = {
@@ -12,7 +15,9 @@ const renderContent = (content, isGameWin) => {
     case 0:
       return null;
     case 'mine':
-      return isGameWin ? 'C' : 'B';
+      return (
+        <img alt="" src={isGameWin ? camomile : mine} className="cell-img" />
+      );
     default:
       return content;
   }
@@ -42,7 +47,7 @@ export const Cell = ({
       onClick={openCell}
       onContextMenu={onRightClick}
     >
-      {isFlagged ? 'F' : null}
+      {isFlagged ? <img alt="" src={flag} className="cell-img" /> : null}
     </div>
   );
 };

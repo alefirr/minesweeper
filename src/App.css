@@ -16,6 +16,7 @@ html {
   border-radius: 40px;
   font-family: 'Silkscreen', cursive;
   font-size: 40px;
+  position: relative;
 }
 
 .settings-tile {
@@ -87,6 +88,12 @@ html {
   align-items: end;
 }
 
+.change-mode-restart-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .end-game-button-container {
   display: flex;
   flex-direction: column;
@@ -95,8 +102,8 @@ html {
 }
 
 .cell {
-  background-color: rgba(42, 236, 42, 0.637);
-  border: 3px solid orange;
+  background-color: rgb(240, 166, 61);
+  border: 3px solid rgb(255, 60, 0);
   border-radius: 20%;
   display: flex;
   justify-content: center;
@@ -114,8 +121,9 @@ html {
 }
 
 .cell-closed {
-  background-color: rgb(136, 90, 6);
-  border: 3px solid rgb(217, 171, 19);
+  background-color: rgba(42, 236, 42, 0.637);
+
+  border: 3px solid rgb(255, 60, 0);
   border-radius: 20%;
 }
 
@@ -123,4 +131,20 @@ html {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.cell-img {
+  height: 30px;
+}
+
+.change-theme-button {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #000;
+  color: white;
+  padding: 0;
 }

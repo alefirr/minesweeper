@@ -179,7 +179,7 @@ export const Field = ({
           </div>
         ))}
       </div>
-      {isGameWin && <div className="win-message">You win!</div>}
+      {/* {isGameWin && <div className="win-message">You win!</div>} */}
     </div>
   );
 };
